@@ -1,4 +1,4 @@
-html<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
@@ -80,6 +80,7 @@ html<!DOCTYPE html>
             background-color: #7a7a7a;
             color: white;
             position: absolute;
+            right: 50px; /* Alinhamento inicial */
         }
 
         .sucesso {
@@ -95,7 +96,7 @@ html<!DOCTYPE html>
 
     <div class="container" id="card-principal">
         <h1>Quer sair comigo? 🌹</h1>
-        <p>Escolha um dos lugares abaixo para a nossa data:</p>
+        <p>Escolha um dos lugares abaixo para o nosso encontro:</p>
         
         <div class="options-container">
             <div class="option-item">
@@ -114,7 +115,7 @@ html<!DOCTYPE html>
 
         <div class="btn-container">
             <button id="btn-sim" onclick="aceitou()">SIM!</button>
-            <button id="btn-nao" onmouseover="furgir()" onclick="furgir()">NÃO</button>
+            <button id="btn-nao" onmouseover="fugir()" onclick="fugir()">NÃO</button>
         </div>
     </div>
 
@@ -129,14 +130,15 @@ html<!DOCTYPE html>
         const cardSucesso = document.getElementById('card-sucesso');
         const mensagemFinal = document.getElementById('mensagem-final');
 
-        // Função que faz o botão "Não" fugir
-        function furgir() {
-            // Define limites para o botão não sumir totalmente da tela
-            const larguraJanela = window.innerWidth - 100;
-            const alturaJanela = window.innerHeight - 50;
+        // Função que faz o botão "Não" fugir de verdade
+        function fugir() {
+            // Desconta o tamanho aproximado do botão para não sumir das bordas
+            const larguraJanela = window.innerWidth - btnNao.offsetWidth;
+            const alturaJanela = window.innerHeight - btnNao.offsetHeight;
 
-            const novoX = Math.random() * larguraJanela;
-            const novoY = Math.random() * alturaJanela;
+            // Gera posições aleatórias na tela inteira
+            const novoX = Math.floor(Math.random() * larguraJanela);
+            const novoY = Math.floor(Math.random() * alturaJanela);
 
             btnNao.style.position = 'fixed';
             btnNao.style.left = novoX + 'px';
@@ -145,7 +147,6 @@ html<!DOCTYPE html>
 
         // Função executada ao clicar no "Sim"
         function aceitou() {
-            // Pega o local selecionado
             const localSelecionado = document.querySelector('input[name="lugar"]:checked').value;
             
             cardPrincipal.style.display = 'none';
