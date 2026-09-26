@@ -1,2 +1,0 @@
-# SegundaChance
-Vamobora
